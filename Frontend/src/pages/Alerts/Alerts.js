@@ -64,6 +64,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Alerts(props) {
+  const paths = [];
+
   const columns = [
     {
       title: 'Schema',
@@ -73,6 +75,7 @@ function Alerts(props) {
       filtering: true,
       headerStyle: { color: '#fff' },
       render: (rowData) => (
+        // (paths = rowData.path.split(' ')),
         console.log('rowData', rowData),
         (
           <Breadcrumbs
@@ -80,8 +83,8 @@ function Alerts(props) {
             maxItems={2}
             aria-label='breadcrumb'
           >
-            {rowData.schema.map((schema) => (
-              <Typography>{schema}</Typography>
+            {rowData.path.split(',').map((path) => (
+              <Typography>{path}</Typography>
             ))}
           </Breadcrumbs>
         )
@@ -108,11 +111,17 @@ function Alerts(props) {
     },
     {
       title: 'Creation Date',
-      field: 'date',
+      field: 'createdAt',
       align: 'center',
       filterPlaceholder: 'filter',
       sorting: true,
       filtering: true
+      // render: (rowData) => (
+      //   new Date(rowData.createdAt),
+      //   // (paths = rowData.path.split(' ')),
+      //   console.log('rowData', rowData),
+      //   (<Typography>{rowData.createdAt.toUTCString()}</Typography>)
+      // )
     },
 
     {
@@ -281,7 +290,7 @@ function Alerts(props) {
                 render: (rowData) => {
                   return (
                     <Grid>
-                      {rowData.AlertType === 'NormalAlert' ? (
+                      {rowData.alertType === 'NormalAlert' ? (
                         <Paper className={classes.paper2}>
                           <Typography
                             variant='h6'
@@ -296,7 +305,7 @@ function Alerts(props) {
                               Alert Type : Normal Alert
                             </Typography>
                             <Typography component='div' style={{ flexGrow: 1 }}>
-                              Alert Message : {rowData.Alertmessage}
+                              Alert Message : {rowData.alertmessage}
                             </Typography>
                             <Typography component='div' style={{ flexGrow: 1 }}>
                               Trigger Rule :{' '}
@@ -324,7 +333,7 @@ function Alerts(props) {
                               Alert Type : Double Thresholds
                             </Typography>
                             <Typography component='div' style={{ flexGrow: 1 }}>
-                              Alert Message :{rowData.Alertmessage}
+                              Alert Message :{rowData.alertmessage}
                             </Typography>
                             <Typography component='div' style={{ flexGrow: 1 }}>
                               Trigger Rule :{' '}

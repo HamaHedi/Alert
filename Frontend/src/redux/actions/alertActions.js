@@ -1,6 +1,5 @@
-import { id } from 'date-fns/locale';
 import axios from '../../axios-instance';
-import Alerts from '../../pages/Alerts/Alerts';
+
 import * as types from '../constants/alertConstante';
 
 export const addAlertStart = () => {
@@ -75,13 +74,14 @@ export const addAlert = (alert) => async (dispatch) => {
     dispatch(addAlertStart());
     axios
       .post('/api/alert/add', {
+        company: '625d4aad07243454b2470c65',
         alertName: alert.alertName,
         // email: alert.email,
         // mobile: alert.mobile,
-        Alertmessage: alert.Alertmessage,
+        alertmessage: alert.alertmessage,
         variable: alert.variable,
-        schema: alert.schema,
-        AlertType: alert.AlertType,
+        path: alert.path,
+        alertType: alert.alertType,
         days: alert.days,
         daysMax: alert.daysMax,
         daysMin: alert.daysMin,
@@ -148,10 +148,10 @@ export const updateAlert = (alert) => async (dispatch) => {
         alertName: alert.alertName,
         // email: alert.email,
         // mobile: alert.mobile,
-        Alertmessage: alert.Alertmessage,
+        alertmessage: alert.alertmessage,
         variable: alert.variable,
         schema: alert.schema,
-        AlertType: alert.AlertType,
+        alertType: alert.alertType,
         days: alert.days,
         daysMax: alert.daysMax,
         daysMin: alert.daysMin,

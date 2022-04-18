@@ -43,11 +43,11 @@ class alert {
       aId,
       alertName,
 
-      Alertmessage,
+      alertmessage,
 
       variable,
-      schema,
-      AlertType,
+      path,
+      alertType,
       days,
       daysMax,
       daysMin,
@@ -61,7 +61,7 @@ class alert {
       percentageMax,
       percentageMin,
       operation,
-      date,
+
       status
     } = req.body;
     console.log(
@@ -69,11 +69,11 @@ class alert {
       aId,
       alertName,
 
-      Alertmessage,
+      alertmessage,
 
       variable,
-      schema,
-      AlertType,
+      path,
+      alertType,
       days,
       daysMax,
       daysMin,
@@ -87,25 +87,25 @@ class alert {
       percentageMax,
       percentageMin,
       operation,
-      date,
+
       status
     );
-    if (AlertType === 'NormalAlert') {
+    if (alertType === 'NormalAlert') {
       if (!aId) {
         return res.json({ message: 'All filled must be required' });
       } else {
         let currentAlert = alertModel.findByIdAndUpdate(aId, {
           alertName,
-          Alertmessage,
+          alertmessage,
           variable,
-          schema,
-          AlertType,
+          path,
+          alertType,
           days,
           hours,
           minute,
           percentage,
           operation,
-          date,
+
           status
         });
         currentAlert.exec((err, result) => {
@@ -116,10 +116,10 @@ class alert {
     } else {
       let currentAlert = alertModel.findByIdAndUpdate(aId, {
         alertName,
-        Alertmessage,
+        alertmessage,
         variable,
-        schema,
-        AlertType,
+        path,
+        alertType,
         daysMax,
         daysMin,
         hoursMax,
@@ -128,7 +128,7 @@ class alert {
         minuteMin,
         percentageMax,
         percentageMin,
-        date,
+
         status
       });
       currentAlert.exec((err, result) => {
@@ -140,13 +140,14 @@ class alert {
 
   async postAlert(req, res) {
     const {
+      company,
       alertName,
 
-      Alertmessage,
+      alertmessage,
 
       variable,
-      schema,
-      AlertType,
+      path,
+      alertType,
       days,
       daysMax,
       daysMin,
@@ -160,41 +161,42 @@ class alert {
       percentageMax,
       percentageMin,
       operation,
-      date,
+
       status
     } = req.body;
-    if (AlertType === 'NormalAlert') {
+    if (alertType === 'NormalAlert') {
       console.log(
         alertName,
 
-        Alertmessage,
+        alertmessage,
 
         variable,
-        schema,
-        AlertType,
+        path,
+        alertType,
         days,
         hours,
         minute,
         percentage,
         operation,
-        date,
+
         status
       );
 
       const newAlertModel = new alertModel({
+        company,
         alertName,
 
-        Alertmessage,
+        alertmessage,
 
         variable,
-        schema,
-        AlertType,
+        path,
+        alertType,
         days,
         hours,
         minute,
         percentage,
         operation,
-        date,
+
         status
       });
 
@@ -208,11 +210,11 @@ class alert {
       console.log(
         alertName,
 
-        Alertmessage,
+        alertmessage,
 
         variable,
-        schema,
-        AlertType,
+        path,
+        alertType,
         hoursMax,
         daysMin,
         daysMax,
@@ -221,19 +223,20 @@ class alert {
         minuteMin,
         percentageMax,
         percentageMin,
-        date,
+
         status
       );
 
       const newAlertModel = new alertModel({
+        company,
         alertName,
 
-        Alertmessage,
+        alertmessage,
 
         variable,
         daysMin,
-        schema,
-        AlertType,
+        path,
+        alertType,
         hoursMax,
         daysMax,
         hoursMin,
@@ -241,7 +244,7 @@ class alert {
         minuteMin,
         percentageMax,
         percentageMin,
-        date,
+
         status
       });
 

@@ -42,8 +42,8 @@ const alertItem = [
 const initialFValues = {
   id: 0,
   alertName: '',
-  AlertType: 'NormalAlert',
-  Alertmessage: '',
+  alertType: 'NormalAlert',
+  alertmessage: '',
   days: 0,
   minute: 0,
   hours: 0,
@@ -57,7 +57,7 @@ const initialFValues = {
   hoursMin: 0,
   daysMin: 0,
   variable: '',
-  schema: []
+  path: ''
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -339,10 +339,10 @@ function AlertForm(props) {
   const handelConfirm = () => {
     setConfirmVariable(true);
     setDisableInput(false);
-
+    let path = schema.toString();
     setValues({
       ...values,
-      schema: schema
+      path: path
     });
     setNotify({
       isOpen: true,
@@ -401,9 +401,9 @@ function AlertForm(props) {
         {' '}
         <Grid item xs={12}>
           <Controls.RadioGroup
-            name='AlertType'
+            name='alertType'
             label='Alert Type'
-            value={values.AlertType}
+            value={values.alertType}
             onChange={handleInputChange}
             items={alertItem}
           />
@@ -421,8 +421,8 @@ function AlertForm(props) {
             <Grid item xs={6}>
               <Controls.Input
                 label='Alert message'
-                name='Alertmessage'
-                value={values.Alertmessage}
+                name='alertmessage'
+                value={values.alertmessage}
                 onChange={handleInputChange}
                 error={errors.alertName}
               />
@@ -924,7 +924,7 @@ function AlertForm(props) {
 
           <Grid>
             <Grid item xs>
-              {values.AlertType === 'NormalAlert' ? (
+              {values.alertType === 'NormalAlert' ? (
                 <Box
                   style={{
                     display: 'flex',
@@ -1241,7 +1241,7 @@ function AlertForm(props) {
           </Grid>
         </Grid>
       </Grid>
-      {values.AlertType === 'NormalAlert' ? (
+      {values.alertType === 'NormalAlert' ? (
         <Grid container direction='column' alignItems='center' justify='center'>
           <Box border={1} {...defaultP2}>
             <Alert severity='info'>
